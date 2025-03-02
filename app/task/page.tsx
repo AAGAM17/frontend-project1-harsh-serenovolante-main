@@ -24,9 +24,17 @@ export default function Task() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskType, setNewTaskType] = useState('Select Type'); // Default type
   const tasksPerPage = 10; // Number of tasks per page
+  const [tasks, setTasks] = useState(dummyTasks);
+  const [checkedTasks, setCheckedTasks] = useState(
+    dummyTasks.reduce((acc, task) => ({ ...acc, [task.id]: false }), {}) // Initialize state with false for each task
+  );
+
+  const handleCheckboxChange = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
 
   // Filter tasks based on selected filters and search term
-  const filteredTasks = dummyTasks.filter(task => {
+  const filteredTasks = tasks.filter(task => {
     const typeMatch = filterType.length === 0 || filterType.includes(task.type);
     const priorityMatch = filterPriority.length === 0 || filterPriority.includes(task.priority);
     const searchMatch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -57,12 +65,12 @@ export default function Task() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-4 text-gray-800">Welcome back!</h1>
-      <p className="mb-4 text-gray-600">Here's a list of your tasks for this month!</p>
+      <h1 className="text-3xl font-bold mb-4 text-gray-800">JSW Steel Leads List</h1>
+      <p className="mb-4 text-gray-600">Here are the latest leads procured for you!</p>
       
       <div className="flex flex-col md:flex-row justify-between mb-4">
         <Input 
-          placeholder="Search task titles" 
+          placeholder="Search Project" 
           className="w-full md:w-1/3 mb-2 md:mb-0" 
           value={searchTerm} 
           onChange={(e) => setSearchTerm(e.target.value)} 
@@ -96,7 +104,7 @@ export default function Task() {
         </DropdownMenu>
         </div>
 
-<Dialog open={openDialog} onOpenChange={setOpenDialog}>
+{/* <Dialog open={openDialog} onOpenChange={setOpenDialog}>
           <DialogTrigger asChild>
             <Button className="ml-4">+ Add Task</Button>
           </DialogTrigger>
@@ -126,25 +134,57 @@ export default function Task() {
               <Button variant="outline" onClick={() => setOpenDialog(false)}>Cancel</Button>
             </DialogFooter>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
+        <div className='flex gap-5 align-middle'>
+          <span>Exclude Projects-Today Leads</span>
+          <input type="checkbox" className="w-5 h-5 cursor-pointer"/>
+        </div>
+
       </div>
 
       <Table className="bg-white rounded-lg shadow-md">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-1/4">Task</TableHead>
-            <TableHead className="w-1/4">Title</TableHead>
-            <TableHead className="w-1/4">Type</TableHead>
-            <TableHead className="w-1/4">Priority</TableHead>
+          <TableHead className="w-1/12">Status</TableHead>
+
+            <TableHead className="w-1/6">Company Name</TableHead>
+            <TableHead className="w-1/6">Headline</TableHead>
+            <TableHead className="w-1/6">Stealth Index</TableHead>
+            <TableHead className="w-1/6">Priority</TableHead>
+            <TableHead className="w-1/6">Chat Link</TableHead>
+
+
           </TableRow>
         </TableHeader>
         <TableBody>
           {currentTasks.map((task) => (
-            <TableRow key={task.id}>
+            
+            
+            <TableRow key={task.id} 
+            
+          >
+              <TableCell>
+              <input
+                    type="checkbox"
+                    onChange={() => handleCheckboxChange(task.id)}
+                    className="w-5 h-5 cursor-pointer"
+                  />
+              </TableCell>
               <TableCell>{task.id}</TableCell>
               <TableCell>{task.title}</TableCell>
               <TableCell>{task.type}</TableCell>
-              <TableCell>{task.priority}</TableCell>
+              <TableCell>{task.priority === "High" ? "High ↑" : task.priority === "Medium" ? "Medium→" : "Low ↓"}</TableCell>
+              <TableCell>
+                <a 
+                  href="#" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline hover:text-blue-700"
+                >
+                  Open Chat
+                </a>
+              </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
