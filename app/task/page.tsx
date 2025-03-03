@@ -8,12 +8,36 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext, PaginationLink } from '@/components/ui/pagination';
 
-const dummyTasks = Array.from({ length: 30 }, (_, index) => ({
-  id: `TASK-${index + 1}`,
-  title: `Task title ${index + 1}`,
-  type: index % 3 === 0 ? "Documentation" : index % 3 === 1 ? "Bug" : "Feature",
-  priority: index % 2 === 0 ? "High" : "Medium",
-}));
+const dummyTasks = [
+  {
+    id: "LEAD-1",
+    title: "Krystal Integrated Services - Wastewater Contract",
+    type: "Water Management",
+    priority: "High",
+    chatLink: "https://www.constructionworld.in/urban-infrastructure/wastewater-and-sewage-treatment/krystal-integrated-wins-2.3m-wastewater-contract/69175"
+  },
+  {
+    id: "LEAD-2",
+    title: "Titagarh Rail Systems - Adani Cement Order",
+    type: "Railway Infrastructure",
+    priority: "High",
+    chatLink: "https://www.constructionworld.in/transport-infrastructure/metro-rail-and-railways-infrastructure/titagarh-rail-systems-wins-adani-cement-order-for-16-wagon-rakes/69075"
+  },
+  {
+    id: "LEAD-3",
+    title: "EPC Company - Water Management Contract",
+    type: "Water Management",
+    priority: "High",
+    chatLink: "https://www.dsij.in/dsijarticledetail/this-small-cap-epc-company-receives-contract-worth-rs-1298-crore-for-water-management-and-civil-works-id003"
+  },
+  {
+    id: "LEAD-4",
+    title: "Ashish Kacholia Company - Dredging Contract",
+    type: "Dredging",
+    priority: "Medium",
+    chatLink: "https://tradebrains.in/features/ashish-kacholia-stock-in-focus-after-receiving-order-worth-48-cr-from-dredging-corporation-of-india/"
+  }
+];
 
 export default function Task() {
   const [filterType, setFilterType] = useState<string[]>([]);
@@ -55,6 +79,7 @@ export default function Task() {
         title: newTaskTitle,
         type: newTaskType,
         priority: "Medium", // Default priority
+        chatLink: "#" // Default empty link
       };
       dummyTasks.push(newTask);
       setOpenDialog(false);
@@ -176,12 +201,12 @@ export default function Task() {
               <TableCell>{task.priority === "High" ? "High ↑" : task.priority === "Medium" ? "Medium→" : "Low ↓"}</TableCell>
               <TableCell>
                 <a 
-                  href="#" 
+                  href={task.chatLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-500 underline hover:text-blue-700"
                 >
-                  Open Chat
+                  Open Article
                 </a>
               </TableCell>
 
