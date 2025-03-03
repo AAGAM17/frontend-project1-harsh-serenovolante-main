@@ -10,28 +10,28 @@ import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, Pagi
 
 const dummyTasks = [
   {
-    id: "LEAD-1",
+    id: "Krystal Integrated Services - Wastewater Contract",
     title: "Krystal Integrated Services - Wastewater Contract",
     type: "Water Management",
     priority: "High",
     chatLink: "https://www.constructionworld.in/urban-infrastructure/wastewater-and-sewage-treatment/krystal-integrated-wins-2.3m-wastewater-contract/69175"
   },
   {
-    id: "LEAD-2",
+    id: "Railway Infrastructure",
     title: "Titagarh Rail Systems - Adani Cement Order",
     type: "Railway Infrastructure",
     priority: "High",
     chatLink: "https://www.constructionworld.in/transport-infrastructure/metro-rail-and-railways-infrastructure/titagarh-rail-systems-wins-adani-cement-order-for-16-wagon-rakes/69075"
   },
   {
-    id: "LEAD-3",
+    id: "EPC Company - Water Management Contract",
     title: "EPC Company - Water Management Contract",
     type: "Water Management",
     priority: "High",
     chatLink: "https://www.dsij.in/dsijarticledetail/this-small-cap-epc-company-receives-contract-worth-rs-1298-crore-for-water-management-and-civil-works-id003"
   },
   {
-    id: "LEAD-4",
+    id: "Ashish Kacholia Company - Dredging Contract",
     title: "Ashish Kacholia Company - Dredging Contract",
     type: "Dredging",
     priority: "Medium",
