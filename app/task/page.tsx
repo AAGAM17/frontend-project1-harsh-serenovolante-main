@@ -14,27 +14,31 @@ const dummyTasks = [
     title: "Krystal Integrated Services - Wastewater Contract",
     type: "Water Management",
     priority: "High",
+    stealthIndex: "Under the radar",
     chatLink: "https://www.constructionworld.in/urban-infrastructure/wastewater-and-sewage-treatment/krystal-integrated-wins-2.3m-wastewater-contract/69175"
   },
   {
-    id: "Railway Infrastructure",
+    id: "Titagarh Rail Systems",
     title: "Titagarh Rail Systems - Adani Cement Order",
     type: "Railway Infrastructure",
     priority: "High",
+    stealthIndex: "Moderately known",
     chatLink: "https://www.constructionworld.in/transport-infrastructure/metro-rail-and-railways-infrastructure/titagarh-rail-systems-wins-adani-cement-order-for-16-wagon-rakes/69075"
   },
   {
-    id: "EPC Company - Water Management Contract",
+    id: "Ganesh Infraworld Limited",
     title: "EPC Company - Water Management Contract",
     type: "Water Management",
     priority: "High",
+    stealthIndex: "Lesser known",
     chatLink: "https://www.dsij.in/dsijarticledetail/this-small-cap-epc-company-receives-contract-worth-rs-1298-crore-for-water-management-and-civil-works-id003"
   },
   {
-    id: "Ashish Kacholia Company - Dredging Contract",
+    id: "Knowledge Marine and Eng. Works",
     title: "Ashish Kacholia Company - Dredging Contract",
     type: "Dredging",
     priority: "Medium",
+    stealthIndex: "Under the radar",
     chatLink: "https://tradebrains.in/features/ashish-kacholia-stock-in-focus-after-receiving-order-worth-48-cr-from-dredging-corporation-of-india/"
   }
 ];
@@ -79,6 +83,7 @@ export default function Task() {
         title: newTaskTitle,
         type: newTaskType,
         priority: "Medium", // Default priority
+        stealthIndex: "Under the radar", // Default stealth index
         chatLink: "#" // Default empty link
       };
       dummyTasks.push(newTask);
@@ -170,34 +175,27 @@ export default function Task() {
       <Table className="bg-white rounded-lg shadow-md">
         <TableHeader>
           <TableRow>
-          <TableHead className="w-1/12">Status</TableHead>
-
+            <TableHead className="w-1/12">Status</TableHead>
             <TableHead className="w-1/6">Company Name</TableHead>
             <TableHead className="w-1/6">Headline</TableHead>
             <TableHead className="w-1/6">Stealth Index</TableHead>
             <TableHead className="w-1/6">Priority</TableHead>
             <TableHead className="w-1/6">Chat Link</TableHead>
-
-
           </TableRow>
         </TableHeader>
         <TableBody>
           {currentTasks.map((task) => (
-            
-            
-            <TableRow key={task.id} 
-            
-          >
+            <TableRow key={task.id}>
               <TableCell>
-              <input
-                    type="checkbox"
-                    onChange={() => handleCheckboxChange(task.id)}
-                    className="w-5 h-5 cursor-pointer"
-                  />
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckboxChange(task.id)}
+                  className="w-5 h-5 cursor-pointer"
+                />
               </TableCell>
               <TableCell>{task.id}</TableCell>
               <TableCell>{task.title}</TableCell>
-              <TableCell>{task.type}</TableCell>
+              <TableCell>{task.stealthIndex}</TableCell>
               <TableCell>{task.priority === "High" ? "High ↑" : task.priority === "Medium" ? "Medium→" : "Low ↓"}</TableCell>
               <TableCell>
                 <a 
@@ -209,7 +207,6 @@ export default function Task() {
                   Open Article
                 </a>
               </TableCell>
-
             </TableRow>
           ))}
         </TableBody>
